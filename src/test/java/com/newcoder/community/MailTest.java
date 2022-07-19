@@ -28,7 +28,7 @@ public class MailTest {
 
     @Test
     public void testTextMail(){
-        mailClient.sendMail("2820208247@qq.com","zhangjunshizhu","ceshi");
+        mailClient.sendMail("1551147676@qq.com","你好","测试中文");
     }
 
     @Test
