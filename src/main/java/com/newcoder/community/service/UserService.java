@@ -82,7 +82,11 @@ public class UserService implements CommunityConstant {
             map.put("usernameMsg", "账号已存在");
             return map;
         }
-
+        // 密码长度
+        if(!(user.getPassword().length()>=8)){
+            map.put("passwordMsg", "密码长度必须大于8位");
+            return map;
+        }
         // 验证邮箱
         u = userMapper.selectByEmail(user.getEmail());
         if (u != null) {
@@ -132,6 +136,17 @@ public class UserService implements CommunityConstant {
         }
     }
 
+    /**
+     * @title login
+     * @author Wenyu Wang
+     * @param username
+     * @param password
+     * @param expiredSeconds
+     * @description
+     *
+     *
+     * @return java.util.Map<java.lang.String,java.lang.Object>
+     */
     public Map<String, Object> login(String username, String password, long expiredSeconds) {
         Map<String, Object> map = new HashMap<>();
 
@@ -181,5 +196,16 @@ public class UserService implements CommunityConstant {
 
     public LoginTicket findLoginTicket(String ticket){
         return loginTicketMapper.selectByTicket(ticket);
+    }
+
+    public int updateHeader(int userId, String headerUrl){
+        return userMapper.updateHeader(userId,headerUrl);
+    }
+
+    // 修改密码
+    public int updatePassword(int userId, String newPassword) {
+
+
+        return userMapper.updatePassword(userId, newPassword);
     }
 }
